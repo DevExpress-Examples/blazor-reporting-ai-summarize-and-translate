@@ -10,8 +10,8 @@ This example is a Blazor application with integrated DevExpress Reports and an A
 
 The AI assistant's role depends on the associated DevExpress Reports component:
 
-- **Data Analysis Assistant**: An assistant for the DevExpress *Web Document Viewer*. This assistant analyzes report content and answers questions related to information within the report.
-- **User Interface Assistant**: An assistant for the DevExpress *Web Report Designer*. This assistant explains how to use the Designer UI to accomplish various tasks. Responses are based on information from [end-user documentation](https://github.com/DevExpress/dotnet-eud) for DevExpress Web Reporting components.
+- **Data Analysis Assistant**: An assistant for the DevExpress *Document Viewer* and *Native Report Viewer*. This assistant analyzes report content and answers questions related to information within the report.
+- **User Interface Assistant**: An assistant for the DevExpress *Report Designer*. This assistant explains how to use the Designer UI to accomplish various tasks. Responses are based on information from [end-user documentation](https://github.com/DevExpress/dotnet-eud) for DevExpress Web Reporting components.
 
 **Please note that AI Assistant initialization takes time. The assistant tab appears once Microsoft Azure scans the source document on the server side.**
 
