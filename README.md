@@ -15,12 +15,7 @@ The AI assistant's role depends on the associated DevExpress Reports component:
 
 **Please note that AI Assistant initialization takes time. The assistant tab appears once Microsoft Azure scans the source document on the server side.**
 
-> [!NOTE]
-> To run this project with an Early Access Preview build (EAP), install npm packages:
->
-> ```
->	npm install --legacy-peer-deps
-> ```
+
 
 ## More Examples
 
