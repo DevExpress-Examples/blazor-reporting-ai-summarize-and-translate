@@ -44,9 +44,9 @@ builder.Services.AddDevExpressAI((config) => {
     config.AddBlazorReportingAIIntegration(config => {
         config.SummarizeBehavior = SummarizeBehavior.Abstractive;
         config.AvailabelLanguages = new List<LanguageItem>() {
-                        new LanguageItem() { Key = "de", Text = "German" },
-                        new LanguageItem() { Key = "en", Text = "English" }
-                    };
+            new LanguageItem() { Key = "de", Text = "German" },
+            new LanguageItem() { Key = "en", Text = "English" }
+        };
     });
 });
 builder.Services.AddDbContext<ReportDbContext>(options => options.UseSqlite(builder.Configuration.GetConnectionString("ReportsDataConnectionString")));

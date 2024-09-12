@@ -15,6 +15,51 @@ The AI assistant's role depends on the associated DevExpress Reports component:
 
 **Please note that AI Assistant initialization takes time. The assistant tab appears once Microsoft Azure scans the source document on the server side.**
 
+## Implementation Details
+
+### Common Settings
+
+#### Add Personal Keys
+
+You need to create an Azure OpenAI resource in the Azure portal to use AI Assistants for DevExpress Reporting. Refer to the following help topic for details: [Microsoft - Create and deploy an Azure OpenAI Service resource](https://learn.microsoft.com/en-us/azure/ai-services/openai/how-to/create-resource?pivots=web-portal).
+
+Once you obtain a private endpoint and an API key, open [appsettings.json](./CS/DxBlazorApplication1/appsettings.json) and add `Name`, `Key`, and `Url` values to the fields below:
+
+```json
+"AISettings": {
+	"Name": "",
+	"Key": "",
+	"Url": ""
+}
+```
+
+Files to Review: 
+- [appsettings.json](./CS/DxBlazorApplication1/appsettings.json)
+
+#### Register AI Services
+
+Register AI services in your application. Add the following code to the _Program.cs_ file:
+
+```cs
+using DevExpress.AIIntegration;
+// ...
+builder.Services.AddDevExpressAI((config) => {
+    config.RegisterChatClientOpenAIService(new AzureOpenAIClient(
+        new Uri(settings.Url),
+        new AzureKeyCredential(settings.Key)
+        ), settings.Name);
+    config.AddBlazorReportingAIIntegration(config => {
+        config.SummarizeBehavior = SummarizeBehavior.Abstractive;
+        config.AvailabelLanguages = new List<LanguageItem>() {
+            new LanguageItem() { Key = "de", Text = "German" },
+            new LanguageItem() { Key = "en", Text = "English" }
+        };
+    });
+});
+```
+
+Files to Review: 
+- [Program.cs](./CS/DxBlazorApplication1/Program.cs)
 
 
 ## More Examples
