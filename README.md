@@ -25,7 +25,7 @@ Add the following NuGet packages:
 
 You need to create an Azure OpenAI resource in the Azure portal to use AI Assistants for DevExpress Reporting. Refer to the following help topic for details: [Microsoft - Create and deploy an Azure OpenAI Service resource](https://learn.microsoft.com/en-us/azure/ai-services/openai/how-to/create-resource?pivots=web-portal).
 
-Once you obtain a private endpoint and an API key, open [appsettings.json](./CS/BlazorReportViewer/appsettings.json) and add `DeploymentName`, `AzureOpenAIKey`, and `AzureOpenAIEndpoint` values to the fields below:
+Once you obtain a private endpoint and an API key, open [appsettings.json](./CS/BlazorReportViewer/appsettings.json) and add `DeploymentName`, `AzureOpenAIKey`, and `AzureOpenAIEndpoint` values to the fields below (DeploymentName is a name of your Azure model, for example, `GPT4o`):
 
 ```json
 "AISettings": {
@@ -33,8 +33,7 @@ Once you obtain a private endpoint and an API key, open [appsettings.json](./CS/
     "AzureOpenAIKey": "",
     "AzureOpenAIEndpoint": ""
 }
-```
-Supported DeploymentName values: `Gpt35Turbo`, `gpt35turbo16k`, `GPT4`, `GPT4o`.
+``` 
 
 Create a class that helps you read these settings:
 
