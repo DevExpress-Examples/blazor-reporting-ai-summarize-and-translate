@@ -7,8 +7,8 @@
 
 This example adds two new buttons that help users to summarize and translate a report content in the Blazor Native Report Viewer with AI-powered functionality:
 
-- **Summarize**: When you click this button, Generative AI summaries generate content that helps users quickly understand/analyze core insights associated with a given report.
-- **Translate**: This button helps users translate report documents, chosen pages, or selected content to a desired language with AI-powered translation tools.
+- **Summarize**: When you click this button, Generative AI summaries generate content that helps you quickly understand/analyze core insights associated with a given report.
+- **Translate**: This button helps you translate report documents, chosen pages, or selected content to a desired language with AI-powered translation tools.
 
 ![AI-Powered Summarize and Translate Buttons](blazor-reporting-ai-enhancements.png)
 
