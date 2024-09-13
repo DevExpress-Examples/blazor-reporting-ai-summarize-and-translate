@@ -6,7 +6,7 @@
 <!-- default badges end -->
 # Reporting for Blazor - Integrate AI-powered Summarize and Translate Features based on Azure OpenAI
 
-This example adds two new buttons that helps users to summarize and translate a report content with AI-powered functionality:
+This example adds two new buttons that help users to summarize and translate a report content with AI-powered functionality:
 
 - **Summarize**: When you click this button, Generative AI summaries generate content that helps users quickly understand/analyze core insights associated with a given report.
 - **Translate**: This button helps users translate report documents, chosen pages, or selected content to a desired language with AI-powered translation tools.
@@ -25,7 +25,7 @@ Add the following NuGet packages:
 
 You need to create an Azure OpenAI resource in the Azure portal to use AI Assistants for DevExpress Reporting. Refer to the following help topic for details: [Microsoft - Create and deploy an Azure OpenAI Service resource](https://learn.microsoft.com/en-us/azure/ai-services/openai/how-to/create-resource?pivots=web-portal).
 
-Once you obtain a private endpoint and an API key, open [appsettings.json](./CS/BlazorReportViewer/appsettings.json) and add `DeploymentName`, `AzureOpenAIKey`, and `AzureOpenAIEndpoint` values to the fields below (DeploymentName is a name of your Azure model, for example, `GPT4o`):
+Once you obtain a private endpoint and an API key, open [appsettings.json](./CS/BlazorReportViewer/appsettings.json) and add `DeploymentName`, `AzureOpenAIKey`, and `AzureOpenAIEndpoint` values to the fields below (`DeploymentName` is a name of your Azure model, for example, `GPT4o`):
 
 ```json
 "AISettings": {
