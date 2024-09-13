@@ -4,50 +4,65 @@
 [![](https://img.shields.io/badge/📖_How_to_use_DevExpress_Examples-e9f6fc?style=flat-square)](https://docs.devexpress.com/GeneralInformation/403183)
 [![](https://img.shields.io/badge/💬_Leave_Feedback-feecdd?style=flat-square)](#does-this-example-address-your-development-requirementsobjectives)
 <!-- default badges end -->
-# Reporting for Blazor - Integrate AI Assistant based on Azure OpenAI
+# Reporting for Blazor - Integrate AI-powered Summarize and Translate Features based on Azure OpenAI
 
-This example is a Blazor application with integrated DevExpress Reports and an AI assistant. User requests and assistant responses are displayed on-screen using the DevExtreme `dxChat` component.
+This example adds two new buttons that helps users to summarize and translate  AI-powered
 
-The AI assistant's role depends on the associated DevExpress Reports component:
-
-- **Data Analysis Assistant**: An assistant for the DevExpress *Document Viewer* and *Native Report Viewer*. This assistant analyzes report content and answers questions related to information within the report.
-- **User Interface Assistant**: An assistant for the DevExpress *Report Designer*. This assistant explains how to use the Designer UI to accomplish various tasks. Responses are based on information from [end-user documentation](https://github.com/DevExpress/dotnet-eud) for DevExpress Web Reporting components.
-
-**Please note that AI Assistant initialization takes time. The assistant tab appears once Microsoft Azure scans the source document on the server side.**
+- **Summarize**: A user can use Generative AI summaries to quickly understand/analyze core insights associated with a given report.
+- **Translate**: The button helps users translate report documents, chosen pages or selected content to a desired language with AI-powered translation tools.
 
 ## Implementation Details
 
-### Common Settings
+### Add NuGet Packages
 
-#### Add Personal Keys
+Add the following NuGet packages:
+- `DevExpress.AIIntegration.AspNetCore.Reporting`
+- `DevExpress.AIIntegration.Azure.OpenAI` or `DevExpress.AIIntegration.OpenAI` based on your AI service preferences.
+-
+- ### Add Personal Keys
 
 You need to create an Azure OpenAI resource in the Azure portal to use AI Assistants for DevExpress Reporting. Refer to the following help topic for details: [Microsoft - Create and deploy an Azure OpenAI Service resource](https://learn.microsoft.com/en-us/azure/ai-services/openai/how-to/create-resource?pivots=web-portal).
 
-Once you obtain a private endpoint and an API key, open [appsettings.json](./CS/DxBlazorApplication1/appsettings.json) and add `Name`, `Key`, and `Url` values to the fields below:
+Once you obtain a private endpoint and an API key, open [appsettings.json](./CS/BlazorReportViewer/appsettings.json) and add `DeploymentName`, `AzureOpenAIKey`, and `AzureOpenAIEndpoint` values to the fields below:
 
 ```json
 "AISettings": {
-	"Name": "",
-	"Key": "",
-	"Url": ""
+    "DeploymentName": "GPT4o",
+    "AzureOpenAIKey": "",
+    "AzureOpenAIEndpoint": ""
+}
+```
+Supported DeploymentName values: `Gpt35Turbo`, `gpt35turbo16k`, `GPT4`, `GPT4o`.
+
+Create a class that helps you read these settings:
+
+```cs
+public class AISettings {
+    public string AzureOpenAIKey { get; set; }
+    public string DeploymentName { get; set; }
+    public string AzureOpenAIEndpoint { get; set; }
 }
 ```
 
-Files to Review: 
-- [appsettings.json](./CS/DxBlazorApplication1/appsettings.json)
+### Register AI Services
 
-#### Register AI Services
-
-Register AI services in your application. Add the following code to the _Program.cs_ file:
+Call the `AddDevExpressAI` method at the application startup to register AI services in your application:
 
 ```cs
 using DevExpress.AIIntegration;
+using DevExpress.AIIntegration.Reporting;
+using DevExpress.AIIntegration.Blazor.Reporting.Viewer.Models;
+using Azure.AI.OpenAI;
+using Azure;
 // ...
+var builder = WebApplication.CreateBuilder(args);
+
+var settings = builder.Configuration.GetSection("AISettings").Get<AISettings>();
 builder.Services.AddDevExpressAI((config) => {
     config.RegisterChatClientOpenAIService(new AzureOpenAIClient(
-        new Uri(settings.Url),
-        new AzureKeyCredential(settings.Key)
-        ), settings.Name);
+        new Uri(settings.AzureOpenAIEndpoint),
+        new AzureKeyCredential(settings.AzureOpenAIKey)
+        ),settings.DeploymentName);
     config.AddBlazorReportingAIIntegration(config => {
         config.SummarizeBehavior = SummarizeBehavior.Abstractive;
         config.AvailabelLanguages = new List<LanguageItem>() {
@@ -56,11 +71,15 @@ builder.Services.AddDevExpressAI((config) => {
         };
     });
 });
+
+var app = builder.Build();
 ```
 
-Files to Review: 
-- [Program.cs](./CS/DxBlazorApplication1/Program.cs)
+## Files to Review 
 
+- [Program.cs](./CS/BlazorReportViewer/Program.cs)
+- [AISettings.cs](./CS/BlazorReportViewer/Settings/AISettings.cs)
+- [appsettings.json](./CS/BlazorReportViewer/appsettings.json)
 
 ## More Examples
 
