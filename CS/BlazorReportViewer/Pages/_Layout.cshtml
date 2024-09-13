@@ -1,5 +1,5 @@
 ﻿@using Microsoft.AspNetCore.Components.Web
-@namespace DxBlazorApplication1.Pages
+@namespace BlazorReportViewer.Pages
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 
 <!DOCTYPE html>
@@ -10,7 +10,7 @@
     <base href="~/" />
     <link href="~/css/bootstrap/bootstrap.min.css" rel="stylesheet" />
     <link href="~/css/site.css" rel="stylesheet" />
-    <link href="DxBlazorApplication1.styles.css" rel="stylesheet" />
+    <link href="BlazorReportViewer.styles.css" rel="stylesheet" />
     <component type="typeof(HeadOutlet)" render-mode="ServerPrerendered" />
 </head>
 <body>
@@ -20,7 +20,7 @@
     }
     @if(isIEOrEdgeLegacy)
     {
-        <component type="typeof(DxBlazorApplication1.Shared.BrowserNotSupported)" render-mode="Static" />
+        <component type="typeof(BlazorReportViewer.Shared.BrowserNotSupported)" render-mode="Static" />
     }
     else
     {

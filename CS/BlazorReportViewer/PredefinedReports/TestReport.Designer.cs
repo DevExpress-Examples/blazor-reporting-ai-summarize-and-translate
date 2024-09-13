@@ -1,4 +1,4 @@
-﻿namespace DxBlazorApplication1.PredefinedReports {
+﻿namespace BlazorReportViewer.PredefinedReports {
     partial class TestReport {
         /// <summary>
         /// Required designer variable.

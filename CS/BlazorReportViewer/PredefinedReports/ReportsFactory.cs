@@ -1,6 +1,6 @@
 ﻿using DevExpress.XtraReports.UI;
 
-namespace DxBlazorApplication1.PredefinedReports
+namespace BlazorReportViewer.PredefinedReports
 {
     public static class ReportsFactory
     {
