@@ -17,7 +17,7 @@ This example adds two new buttons that help users to summarize and translate a r
 ### Add NuGet Packages
 
 Add the following NuGet packages:
-- `DevExpress.AIIntegration.AspNetCore.Reporting`
+- `DevExpress.AIIntegration.Blazor.Reporting.Viewer`
 - `DevExpress.AIIntegration.Azure.OpenAI` or `DevExpress.AIIntegration.OpenAI` based on your AI service preferences.
 
 ### Add Personal Keys
