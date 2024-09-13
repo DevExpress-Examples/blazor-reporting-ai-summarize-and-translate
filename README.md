@@ -20,8 +20,8 @@ This example adds two new buttons that helps users to summarize and translate a 
 Add the following NuGet packages:
 - `DevExpress.AIIntegration.AspNetCore.Reporting`
 - `DevExpress.AIIntegration.Azure.OpenAI` or `DevExpress.AIIntegration.OpenAI` based on your AI service preferences.
--
-- ### Add Personal Keys
+
+### Add Personal Keys
 
 You need to create an Azure OpenAI resource in the Azure portal to use AI Assistants for DevExpress Reporting. Refer to the following help topic for details: [Microsoft - Create and deploy an Azure OpenAI Service resource](https://learn.microsoft.com/en-us/azure/ai-services/openai/how-to/create-resource?pivots=web-portal).
 
