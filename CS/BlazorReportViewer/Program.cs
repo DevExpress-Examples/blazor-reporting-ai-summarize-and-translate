@@ -1,9 +1,9 @@
-using DevExpress.AIIntegration;
-using DevExpress.AIIntegration.Reporting;
-using DevExpress.AIIntegration.Blazor.Reporting.Viewer.Models;
-using Azure.AI.OpenAI;
 using Azure;
+using Azure.AI.OpenAI;
 using BlazorReportViewer.Settings;
+using DevExpress.AIIntegration;
+using DevExpress.AIIntegration.Blazor.Reporting.Viewer.Models;
+using Microsoft.Extensions.AI;
 
 var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
@@ -17,13 +17,14 @@ builder.Services.Configure<DevExpress.Blazor.Configuration.GlobalOptions>(option
 });
 var settings = builder.Configuration.GetSection("AISettings").Get<AISettings>();
 builder.Services.AddDevExpressAI((config) => {
-    config.RegisterChatClientOpenAIService(new AzureOpenAIClient(
-        new Uri(settings.AzureOpenAIEndpoint),
-        new AzureKeyCredential(settings.AzureOpenAIKey)
-        ),settings.DeploymentName);
+    IChatClient client = new AzureOpenAIClient(
+        new Uri(settings.AzureOpenAIEndpoint), 
+        new AzureKeyCredential(settings.AzureOpenAIKey))
+            .AsChatClient(settings.DeploymentName);
+    config.RegisterChatClient(client);
     config.AddBlazorReportingAIIntegration(config => {
-        config.SummarizeBehavior = SummarizeBehavior.Abstractive;
-        config.AvailabelLanguages = new List<LanguageItem>() {
+        config.SummarizationMode = SummarizationMode.Abstractive;
+        config.AvailableLanguages = new List<LanguageItem>() {
             new LanguageItem() { Key = "de", Text = "German" },
             new LanguageItem() { Key = "es", Text = "Spanish" },
             new LanguageItem() { Key = "en", Text = "English" }

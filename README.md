@@ -22,8 +22,8 @@ The following is an image of the application interface. As you can see, users ca
 Add the following NuGet packages:
 
 - `DevExpress.AIIntegration.Blazor.Reporting.Viewer`
-- `DevExpress.AIIntegration.Azure.OpenAI` or `DevExpress.AIIntegration.OpenAI` based on your AI service preferences. This project uses Azure OpenAI. The remainder of this document describes steps related to this package.  
-
+- `DevExpress.Drawing.Skia` if you use a non-Windows environment.
+- `Microsoft.Extensions.AI.OpenAI`, `Azure.OpenAI.AI`, `Azure.Identity` or `Microsoft.Extensions.AI.Ollama` based on your AI service preferences. This project uses Azure OpenAI. The remainder of this document describes steps related to this package.  
 ### Add Personal Keys
 
 To use AI-based Summarize and Translate functionality in your application, you must create an Azure OpenAI resource in the Azure portal. Refer to the following help topic for additional information/guidance: [Microsoft - Create and deploy an Azure OpenAI Service resource](https://learn.microsoft.com/en-us/azure/ai-services/openai/how-to/create-resource?pivots=web-portal).
@@ -63,13 +63,14 @@ var builder = WebApplication.CreateBuilder(args);
 
 var settings = builder.Configuration.GetSection("AISettings").Get<AISettings>();
 builder.Services.AddDevExpressAI((config) => {
-    config.RegisterChatClientOpenAIService(new AzureOpenAIClient(
-        new Uri(settings.AzureOpenAIEndpoint),
-        new AzureKeyCredential(settings.AzureOpenAIKey)
-        ),settings.DeploymentName);
+    IChatClient client = new AzureOpenAIClient(
+        new Uri(settings.AzureOpenAIEndpoint), 
+        new AzureKeyCredential(settings.AzureOpenAIKey))
+            .AsChatClient(settings.DeploymentName);
+    config.RegisterChatClient(client);
     config.AddBlazorReportingAIIntegration(config => {
-        config.SummarizeBehavior = SummarizeBehavior.Abstractive;
-        config.AvailabelLanguages = new List<LanguageItem>() {
+        config.SummarizationMode = SummarizationMode.Abstractive;
+        config.AvailableLanguages = new List<LanguageItem>() {
             new LanguageItem() { Key = "de", Text = "German" },
             new LanguageItem() { Key = "es", Text = "Spanish" },
             new LanguageItem() { Key = "en", Text = "English" }

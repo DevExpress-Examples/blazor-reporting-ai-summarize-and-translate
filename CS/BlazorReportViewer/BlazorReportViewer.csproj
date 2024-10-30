@@ -33,12 +33,14 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="DevExpress.AIIntegration.Azure.OpenAI" Version="24.2.1-alpha-24256" />
-    <PackageReference Include="DevExpress.AIIntegration.Blazor.Reporting.Viewer" Version="24.2.1-alpha-24256" />
+    <PackageReference Include="Azure.AI.OpenAI" Version="2.0.0" />
+    <PackageReference Include="Azure.Identity" Version="1.13.1" />
+    <PackageReference Include="DevExpress.AIIntegration.Blazor.Reporting.Viewer" Version="24.2.*-*" />
+    <PackageReference Include="DevExpress.AspNetCore.Reporting" Version="24.2.*-*" />
+    <PackageReference Include="DevExpress.Blazor.Reporting.Viewer" Version="24.2.*-*" />
+    <PackageReference Include="DevExpress.Drawing.Skia" Version="24.2.*-*" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="8.0.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="8.0.0" />
-    <PackageReference Include="System.Data.SQLite" Version="1.0.114.4" />
-    <PackageReference Include="DevExpress.AspNetCore.Reporting" Version="24.2.1-alpha-24256" />
-    <PackageReference Include="DevExpress.Blazor.Reporting.Viewer" Version="24.2.1-alpha-24256" />
+    <PackageReference Include="Microsoft.Extensions.AI.OpenAI" Version="9.0.0-preview.9.24525.1" />
   </ItemGroup>
 </Project>
