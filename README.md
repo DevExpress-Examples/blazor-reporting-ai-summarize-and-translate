@@ -3,12 +3,14 @@
 [![](https://img.shields.io/badge/📖_How_to_use_DevExpress_Examples-e9f6fc?style=flat-square)](https://docs.devexpress.com/GeneralInformation/403183)
 [![](https://img.shields.io/badge/💬_Leave_Feedback-feecdd?style=flat-square)](#does-this-example-address-your-development-requirementsobjectives)
 <!-- default badges end -->
-# Reporting for Blazor - Summarize and Translate DevExpress Reports Using Azure OpenAI 
+# Reporting for Blazor - Summarize and Translate DevExpress Reports
 
 This example adds AI-powered summarize/translate capabilities to the DevExpress Blazor Report Viewer. These capabilities are available within the user interface via two buttons designed to access the report document and process content as follows: 
 
 - **Summarize**: Uses generative AI to summarize report content and displays core insights associated with this report. 
 - **Translate**: Uses AI services to translate report content to another language. 
+
+These actions are also available in context menu when you select report content. Note the AI Operations icon that floats next to the report page. Users can click it to invoke the context menu.
 
 The following is an image of the application interface. As you can see, users can process the entire document, individual pages, or selected content. 
 
@@ -21,9 +23,15 @@ The following is an image of the application interface. As you can see, users ca
 Add the following NuGet packages:
 
 - `DevExpress.AIIntegration.Blazor.Reporting.Viewer`
-- `DevExpress.Drawing.Skia` if you use a non-Windows environment.
-- `Microsoft.Extensions.AI.OpenAI`, `Azure.OpenAI.AI`, `Azure.Identity` or `Microsoft.Extensions.AI.Ollama` based on your AI service preferences. This project uses Azure OpenAI. The remainder of this document describes steps related to this package.  
+- `DevExpress.Drawing.Skia` (if you use a non-Windows environment)
+- `Microsoft.Extensions.AI.OpenAI`, `Azure.AI.OpenAI`, `Azure.Identity` or `Microsoft.Extensions.AI.Ollama` based on your AI service preferences. This project uses Azure OpenAI. The remainder of this document describes steps related to this package.
+
+For the list of supported AI services and the corresponding prerequisites, refer to *Supported AI Services* in the following help topic: [AI-powered Extensions for DevExpress Reporting](https://docs.devexpress.com/XtraReports/405211/ai-powered-functionality/ai-for-devexpress-reporting?v=24.2#supported-ai-services
+).
 ### Add Personal Keys
+
+> [!NOTE]  
+> DevExpress AI-powered extensions follow the "bring your own key" principle. DevExpress does not offer a REST API and does not ship any built-in LLMs/SLMs. You need an active Azure/Open AI subscription to obtain the REST API endpoint, key, and model deployment name. These variables must be specified at application startup to register AI clients and enable DevExpress AI-powered Extensions in your application.
 
 To use AI-based Summarize and Translate functionality in your application, you must create an Azure OpenAI resource in the Azure portal. Refer to the following help topic for additional information/guidance: [Microsoft - Create and deploy an Azure OpenAI Service resource](https://learn.microsoft.com/en-us/azure/ai-services/openai/how-to/create-resource?pivots=web-portal).
 
@@ -61,15 +69,17 @@ using Azure;
 var builder = WebApplication.CreateBuilder(args);
 
 var settings = builder.Configuration.GetSection("AISettings").Get<AISettings>();
+
+IChatClient chatClient = new AzureOpenAIClient(
+    new Uri(settings.AzureOpenAIEndpoint),
+    new AzureKeyCredential(settings.AzureOpenAIKey))
+    .AsChatClient(settings.DeploymentName);
+builder.Services.AddChatClient(config => config.Use(chatClient));
+
 builder.Services.AddDevExpressAI((config) => {
-    IChatClient client = new AzureOpenAIClient(
-        new Uri(settings.AzureOpenAIEndpoint), 
-        new AzureKeyCredential(settings.AzureOpenAIKey))
-            .AsChatClient(settings.DeploymentName);
-    config.RegisterChatClient(client);
     config.AddBlazorReportingAIIntegration(config => {
         config.SummarizationMode = SummarizationMode.Abstractive;
-        config.AvailableLanguages = new List<LanguageItem>() {
+        config.Languages = new List<LanguageItem>() {
             new LanguageItem() { Key = "de", Text = "German" },
             new LanguageItem() { Key = "es", Text = "Spanish" },
             new LanguageItem() { Key = "en", Text = "English" }
@@ -78,6 +88,7 @@ builder.Services.AddDevExpressAI((config) => {
 });
 
 var app = builder.Build();
+// ...
 ```
 
 ## Files to Review 
@@ -85,6 +96,11 @@ var app = builder.Build();
 - [Program.cs](./CS/BlazorReportViewer/Program.cs)
 - [AISettings.cs](./CS/BlazorReportViewer/Settings/AISettings.cs)
 - [appsettings.json](./CS/BlazorReportViewer/appsettings.json)
+
+## Documentation
+
+- [Summarize and Translate Reports in the Blazor Report Viewer](https://docs.devexpress.com/XtraReports/405197/ai-powered-functionality/summarize-translate-in-blazor-viewer?v=24.2)
+- [AI-powered Extensions for DevExpress Reporting](https://docs.devexpress.com/XtraReports/405211/ai-powered-functionality/ai-for-devexpress-reporting?v=24.2)
 
 ## More Examples
 
