@@ -21,7 +21,7 @@ IChatClient chatClient = new AzureOpenAIClient(
     new Uri(settings.AzureOpenAIEndpoint),
     new AzureKeyCredential(settings.AzureOpenAIKey)).AsChatClient(settings.DeploymentName);
 
-builder.Services.AddChatClient(chatClient);
+builder.Services.AddSingleton(chatClient);
 builder.Services.AddDevExpressAI((config) => {
     config.AddBlazorReportingAIIntegration(config => {
         config.SummarizationMode = SummarizationMode.Abstractive;
