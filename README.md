@@ -99,9 +99,6 @@ var app = builder.Build();
 // ...
 ```
 
-> [!Tip]
-> Refer to the following help topic for instructions on registering OpenAI, Azure OpenAI, Ollama, and Semantic Kernel: [Register AI Clients](https://docs.devexpress.com/CoreLibraries/405204/ai-powered-extensions#register-ai-clients).
-
 ## Files to Review 
 
 - [Program.cs](./CS/BlazorReportViewer/Program.cs)
