@@ -30,7 +30,7 @@ Add the following NuGet packages:
 > [!Note]
 > We use the following versions of the `Microsoft.Extensions.AI.*` libraries in our source code:
 >
-> v24.2.6+ | **9.3.0-preview.1.25161.3**
+> v25.1.2+ | **9.4.3-preview.1.25230.7**
 >
 > We do not guarantee compatibility or correct operation with higher versions. Refer to the following announcement for additional information: [Microsoft.Extensions.AI.Abstractions NuGet Package Version Upgrade in v24.2.6](https://community.devexpress.com/blogs/news/archive/2025/03/12/important-announcement-microsoft-extensions-ai-abstractions-nuget-package-version-upgrade.aspx).
 
@@ -80,19 +80,21 @@ var settings = builder.Configuration.GetSection("AISettings").Get<AISettings>();
 
 IChatClient chatClient = new AzureOpenAIClient(
     new Uri(settings.AzureOpenAIEndpoint),
-    new AzureKeyCredential(settings.AzureOpenAIKey))
-    .AsChatClient(settings.DeploymentName);
-builder.Services.AddChatClient(chatClient);
+    new AzureKeyCredential(settings.AzureOpenAIKey)).GetChatClient(settings.DeploymentName).AsIChatClient();
 
+builder.Services.AddChatClient(chatClient);
 builder.Services.AddDevExpressAI((config) => {
-    config.AddBlazorReportingAIIntegration(config => {
-        config.SummarizationMode = SummarizationMode.Abstractive;
-        config.Languages = new List<LanguageItem>() {
-            new LanguageItem() { Key = "de", Text = "German" },
-            new LanguageItem() { Key = "es", Text = "Spanish" },
-            new LanguageItem() { Key = "en", Text = "English" }
-        };
-    });
+    config.AddBlazorReportingAIIntegration(cfg =>
+        cfg.AddSummarization(summarizeOptions =>
+            summarizeOptions.SetSummarizationMode(SummarizationMode.Abstractive))
+        .AddTranslation(transateOptions =>
+                transateOptions.SetLanguages(new List<LanguageInfo> {
+                        new LanguageInfo { Text = "English", Id = "En" },
+                        new LanguageInfo { Text = "German", Id = "De" },
+                        new LanguageInfo { Text = "Spanish", Id = "Es" }
+                    })
+                    .EnableTranslation())
+        );
 });
 
 var app = builder.Build();
