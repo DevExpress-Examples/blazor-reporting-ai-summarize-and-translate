@@ -1,11 +1,11 @@
-using Azure;
 using Azure.AI.OpenAI;
+using Azure;
 using BlazorReportViewer.Settings;
-using DevExpress.AIIntegration;
-using DevExpress.AIIntegration.Blazor.Reporting.Viewer.Models;
-using DevExpress.AIIntegration.Reporting.Common.Models;
+
 using DevExpress.Blazor.Reporting;
 using Microsoft.Extensions.AI;
+using DevExpress.AIIntegration;
+using DevExpress.AIIntegration.Reporting.Common.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
@@ -13,7 +13,6 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
 builder.Services.AddDevExpressServerSideBlazorReportViewer();
-
 var settings = builder.Configuration.GetSection("AISettings").Get<AISettings>();
 
 IChatClient chatClient = new AzureOpenAIClient(
