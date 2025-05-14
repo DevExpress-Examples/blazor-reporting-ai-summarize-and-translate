@@ -24,8 +24,8 @@ builder.Services.AddDevExpressAI((config) => {
     config.AddBlazorReportingAIIntegration(cfg =>
         cfg.AddSummarization(summarizeOptions =>
             summarizeOptions.SetSummarizationMode(SummarizationMode.Abstractive))
-        .AddTranslation(transateOptions =>
-                transateOptions.SetLanguages(new List<LanguageInfo> {
+        .AddTranslation(translateOptions =>
+                translateOptions.SetLanguages(new List<LanguageInfo> {
                         new LanguageInfo { Text = "English", Id = "En" },
                         new LanguageInfo { Text = "German", Id = "De" },
                         new LanguageInfo { Text = "Spanish", Id = "Es" }
