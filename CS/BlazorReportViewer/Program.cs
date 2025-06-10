@@ -24,13 +24,12 @@ builder.Services.AddDevExpressAI((config) => {
     config.AddBlazorReportingAIIntegration(cfg =>
         cfg.AddSummarization(summarizeOptions =>
             summarizeOptions.SetSummarizationMode(SummarizationMode.Abstractive))
-        .AddTranslation(translateOptions =>
+            .AddTranslation(translateOptions =>
                 translateOptions.SetLanguages(new List<LanguageInfo> {
-                        new LanguageInfo { Text = "English", Id = "En" },
-                        new LanguageInfo { Text = "German", Id = "De" },
-                        new LanguageInfo { Text = "Spanish", Id = "Es" }
+                        new LanguageInfo { Text = "German", Id = "de-DE" },
+                        new LanguageInfo { Text = "Spanish", Id = "es-ES" }
                     })
-                    .EnableTranslation())
+                .EnableTranslation().EnableInlineTranslation())
         );
 });
 builder.WebHost.UseStaticWebAssets();
