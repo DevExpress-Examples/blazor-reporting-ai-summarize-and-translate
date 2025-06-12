@@ -19,7 +19,7 @@ var settings = builder.Configuration.GetSection("AISettings").Get<AISettings>();
 
 IChatClient chatClient = new AzureOpenAIClient(
     new Uri(settings.AzureOpenAIEndpoint),
-    new AzureKeyCredential(settings.AzureOpenAIKey)).GetChatClient(settings.DeploymentName).AsICjatClient();
+    new AzureKeyCredential(settings.AzureOpenAIKey)).GetChatClient(settings.DeploymentName).AsIChatClient();
 
 builder.Services.AddChatClient(chatClient);
 builder.Services.AddDevExpressAI((config) => {
