@@ -25,14 +25,16 @@ Add the following NuGet packages:
 
 - `DevExpress.AIIntegration.Blazor.Reporting.Viewer`
 - `DevExpress.Drawing.Skia` (if you use a non-Windows environment)
-- `Microsoft.Extensions.AI.OpenAI`, `Azure.AI.OpenAI`, `Azure.Identity` or `Microsoft.Extensions.AI.Ollama` based on your AI service preferences. This project uses Azure OpenAI. The remainder of this document describes steps related to this package.
+- `Microsoft.Extensions.AI.OpenAI`, `Azure.AI.OpenAI`, `Azure.Identity` or `OllamaSharp` based on your AI service preferences. This project uses Azure OpenAI. The remainder of this document describes steps related to this package.
 
 > [!Note]
 > We use the following versions of the `Microsoft.Extensions.AI.*` libraries in our source code:
 >
-> v24.2.6+ | **9.3.0-preview.1.25161.3**
+> - Microsoft.Extensions.AI.Abstractions: **9.5.0**
+> - Microsoft.Extensions.AI: **9.5.0**
+> - Microsoft.Extensions.AI.OpenAI: **9.5.0-preview.1.25265.7**
 >
-> We do not guarantee compatibility or correct operation with higher versions. Refer to the following announcement for additional information: [Microsoft.Extensions.AI.Abstractions NuGet Package Version Upgrade in v24.2.6](https://community.devexpress.com/blogs/news/archive/2025/03/12/important-announcement-microsoft-extensions-ai-abstractions-nuget-package-version-upgrade.aspx).
+> We do not guarantee compatibility or correct operation with other versions.
 
 For the list of supported AI services and the corresponding prerequisites, refer to *Supported AI Services* in the following help topic: [AI-powered Extensions for DevExpress Reporting](https://docs.devexpress.com/XtraReports/405211/ai-powered-functionality/ai-for-devexpress-reporting?v=24.2#supported-ai-services).
 
@@ -81,7 +83,7 @@ var settings = builder.Configuration.GetSection("AISettings").Get<AISettings>();
 IChatClient chatClient = new AzureOpenAIClient(
     new Uri(settings.AzureOpenAIEndpoint),
     new AzureKeyCredential(settings.AzureOpenAIKey))
-    .AsChatClient(settings.DeploymentName);
+    .GetChatClient(settings.DeploymentName).AsIChatClient();
 builder.Services.AddChatClient(chatClient);
 
 builder.Services.AddDevExpressAI((config) => {
