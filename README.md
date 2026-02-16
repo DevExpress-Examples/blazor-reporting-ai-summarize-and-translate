@@ -111,8 +111,8 @@ var app = builder.Build();
 
 ## Documentation
 
-- [Summarize and Translate Reports in the Blazor Report Viewer](https://docs.devexpress.com/XtraReports/405197/ai-powered-functionality/summarize-translate-in-blazor-viewer?v=24.2)
-- [AI-powered Extensions for DevExpress Reporting](https://docs.devexpress.com/XtraReports/405211/ai-powered-functionality/ai-for-devexpress-reporting?v=24.2)
+- [Summarize and Translate Reports in the Blazor Report Viewer](https://docs.devexpress.com/XtraReports/405197/ai-powered-functionality/summarize-translate-in-blazor-viewer)
+- [AI-powered Extensions for DevExpress Reporting](https://docs.devexpress.com/XtraReports/405211/ai-powered-functionality/ai-for-devexpress-reporting)
 
 ## More Examples
 
@@ -128,3 +128,4 @@ var app = builder.Build();
 
 (you will be redirected to DevExpress.com to submit your response)
 <!-- feedback end -->
+
