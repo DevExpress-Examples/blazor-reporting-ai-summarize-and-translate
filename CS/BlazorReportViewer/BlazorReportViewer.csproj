@@ -34,11 +34,11 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="8.0.11" />
-    <PackageReference Include="Microsoft.Extensions.AI" Version="9.7.1" />
-     <PackageReference Include="Microsoft.Extensions.AI.OpenAI" Version="9.7.1-preview.1.25365.4" />
-    <PackageReference Include="Azure.AI.OpenAI" Version="2.2.0-beta.5" />
-    <PackageReference Include="DevExpress.AIIntegration.Blazor.Reporting.Viewer" Version="25.2.*-*" />
+    <PackageReference Include="Microsoft.Extensions.AI" Version="10.5.1" />
+     <PackageReference Include="Microsoft.Extensions.AI.OpenAI" Version="10.5.1" />
+    <PackageReference Include="Azure.AI.OpenAI" Version="2.3.0-beta.2" />
+    <PackageReference Include="DevExpress.AIIntegration.Blazor.Reporting.Viewer" Version="26.1.*-*" />
     <PackageReference Include="DevExpress.Drawing.Skia" Version="25.2.*-*" />
-    <PackageReference Include="DevExpress.Blazor.Reporting.Viewer" Version="25.2.*-*" />
+    <PackageReference Include="DevExpress.Blazor.Reporting.Viewer" Version="26.1.*-*" />
   </ItemGroup>
 </Project>

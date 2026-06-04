@@ -29,13 +29,11 @@ Add the following NuGet packages:
 - `Microsoft.Extensions.AI.OpenAI`, `Azure.AI.OpenAI`, `Azure.Identity` or `OllamaSharp` based on your AI service preferences. This project uses Azure OpenAI. The remainder of this document describes steps related to this package.
 
 > [!Note]
-> We use the following versions of Microsoft AI packages in our `v25.2.2+` source code:
+> We use the following versions of Microsoft AI packages in our `v26.1.2+` source code:
 >
-> * `Microsoft.Extensions.AI` | **9.7.1**
-> * `Microsoft.Extensions.AI.OpenAI` | **9.7.1-preview.1.25365.4**
-> * `Azure.AI.OpenAI` | **2.2.0-beta.5**
->
-> We do not guarantee compatibility or correct operation with higher versions. Refer to the following announcement for additional information: [DevExpress.AIIntegration moves to a stables version](https://supportcenter.devexpress.com/ticket/details/t1292705/devexpress-aiintegration-references-stable-versions-of-microsoft-ai-packages).
+> * `Microsoft.Extensions.AI` | **10.5.1**
+> * `Microsoft.Extensions.AI.OpenAI` | **10.5.1**
+> * `Azure.AI.OpenAI` | **2.3.0-beta.2**
 
 For the list of supported AI services and the corresponding prerequisites, refer to *Supported AI Services* in the following help topic: [AI-powered Extensions for DevExpress Reporting](https://docs.devexpress.com/XtraReports/405211/ai-powered-functionality/ai-for-devexpress-reporting#supported-ai-services).
 
@@ -46,11 +44,11 @@ For the list of supported AI services and the corresponding prerequisites, refer
 
 To use AI-based Summarize and Translate functionality in your application, you must create an Azure OpenAI resource in the Azure portal. Refer to the following help topic for additional information/guidance: [Microsoft - Create and deploy an Azure OpenAI Service resource](https://learn.microsoft.com/en-us/azure/ai-services/openai/how-to/create-resource?pivots=web-portal).
 
-Once you obtain a private endpoint and an API key, open [appsettings.json](./CS/BlazorReportViewer/appsettings.json) and specify `DeploymentName`, `AzureOpenAIKey`, and `AzureOpenAIEndpoint` values. Note that `DeploymentName` is set to `GPT4o`, but you can specify a different model: 
+Once you obtain a private endpoint and an API key, open [appsettings.json](./CS/BlazorReportViewer/appsettings.json) and specify `DeploymentName`, `AzureOpenAIKey`, and `AzureOpenAIEndpoint` values:
 
 ```json
 "AISettings": {
-    "DeploymentName": "GPT4o",
+    "DeploymentName": "",
     "AzureOpenAIKey": "",
     "AzureOpenAIEndpoint": ""
 }
